@@ -1,0 +1,201 @@
+<!-- Main Slider Start -->
+<div class="header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header-slider normal-slider">
+          <div class="header-slider-item" style="overflow: hidden;">
+            <img src="images/slider-1.jpg" alt="Slider Image" style="margin: auto;" />
+            <div class="header-slider-caption">
+              <p>"Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn.” <br>
+                <b>Barack Obama</b>
+              </p>
+
+            </div>
+          </div>
+          <div class="header-slider-item" style="overflow: hidden;">
+            <img src="images/slider-2.jpg" alt="Slider Image" style="margin: auto;" />
+            <div class="header-slider-caption">
+              <p>"Tất cả những gì con người làm, nghĩ hoặc trở thành: được bảo tồn một cách kỳ diệu trên
+                những trang sách.” <br> <b> Thomas
+                  Carlyle</b></p>
+
+            </div>
+          </div>
+          <div class="header-slider-item" style="overflow: hidden;">
+            <img src="images/slider-3.jpg" alt="Slider Image" style="margin: auto;" />
+            <div class="header-slider-caption">
+              <p>S"Chính từ sách mà những người khôn ngoan tìm được sự an ủi khỏi những rắc rối của cuộc
+                đời.” <br> <b>Victor Hugo</b></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Slider End -->
+
+<!-- Feature Start-->
+<div class="feature">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-6 feature-col">
+        <div class="feature-content">
+          <i class="fab fa-cc-mastercard"></i>
+          <h2>Secure Payment</h2>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 feature-col">
+        <div class="feature-content">
+          <i class="fa fa-truck"></i>
+          <h2>Domestic Delivery</h2>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 feature-col">
+        <div class="feature-content">
+          <i class="fa fa-sync-alt"></i>
+          <h2>7 Days Return</h2>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 feature-col">
+        <div class="feature-content">
+          <i class="fa fa-comments"></i>
+          <h2>24/7 Support</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Feature End-->
+
+<!-- Category Start-->
+<div class="category">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="category-item ch-400">
+          <img src="images/category-3.jpg" />
+          <a class="category-name" href="/book?category=5fca38189731c130ddcf35fd">
+            <p>Fantasy Books</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="category-item ch-250">
+          <img src="images/category-4.jpg" />
+          <a class="category-name" href="book?category=5fffc2f541cb654a0ce7100f">
+            <p>Non Fiction Books</p>
+          </a>
+        </div>
+        <div class="category-item ch-150">
+          <img src="images/category-5.jpg" />
+          <a class="category-name" href="/book?category=5fffcc7224bf9f2c4c94eb86">
+            <p>Fiction Books</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="category-item ch-150">
+          <img src="images/category-6.jpg" />
+          <a class="category-name" href="/book?category=5fc0f30408e45c68dbae2a8d">
+            <p>Comedy</p>
+          </a>
+        </div>
+        <div class="category-item ch-250">
+          <img src="images/category-7.jpg" />
+          <a class="category-name" href="/book?category=5fca1ba7e3f8c9223242b737">
+            <p>Manga</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="category-item ch-400">
+          <img src="images/category-8.jpg" />
+          <a class="category-name" href="/book?category=5ffe917d6f93dd4bb501a1eb">
+            <p>Scientific Books</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Category End-->
+
+<!-- Call to Action Start -->
+<div class="call-to-action">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1>call us for any queries</h1>
+      </div>
+      <div class="col-md-6">
+        <a href="tel:0937646422">(+84)937646422</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Call to Action End -->
+
+<!-- Featured Product Start -->
+<div class="featured-product product">
+  <div class="container-fluid">
+    <div class="section-header">
+      <h1>Featured Product</h1>
+    </div>
+    <div class="row align-items-center product-slider product-slider-4">
+
+      {{#each featuredBooks}}
+      <div class="col-md-4">
+        <div class="product-item">
+          <div class="product-title" style="height: 84px;">
+            <a href="/book/{{_id}}/detail">{{name}}</a>
+          </div>
+          <div class="product-image">
+            <a href="/book/{{_id}}/detail">
+              <img height="400px" src={{image}} style="object-fit:contain" alt="Product Image">
+            </a>
+          </div>
+          <div class="product-price">
+            <h3>{{price}}<span> ₫</span></h3>
+            <a class="btn" href="/book/{{_id}}/detail"><i class="fa fa-shopping-cart"></i>Buy Now</a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<!-- Featured Product End -->
+
+<!-- Recent Product Start -->
+<div class="recent-product product">
+  <div class="container-fluid">
+    <div class="section-header">
+      <h1>Lated Product</h1>
+    </div>
+    <div class="row align-items-center product-slider product-slider-4">
+
+      {{#each latedBooks}}
+      <div class="col-md-4">
+        <div class="product-item">
+          <div class="product-title" style="height: 84px;">
+            <a href="/book/{{_id}}/detail">{{name}}</a>
+          </div>
+          <div class="product-image">
+            <a href="/book/{{_id}}/detail">
+              <img height="400px" src={{image}} style="object-fit:contain" alt="Product Image">
+            </a>
+          </div>
+          <div class="product-price">
+            <h3>{{price}}<span> ₫</span></h3>
+            <a class="btn" href="/book/{{_id}}/detail"><i class="fa fa-shopping-cart"></i>Buy Now</a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<!-- Recent Product End -->

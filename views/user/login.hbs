@@ -1,0 +1,54 @@
+<!-- Breadcrumb Start -->
+{{!-- <div class="breadcrumb-wrap">
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Products</a></li>
+      <li class="breadcrumb-item active">Login</li>
+    </ul>
+  </div>
+</div> --}}
+<!-- Breadcrumb End -->
+
+<!-- Login Start -->
+<div class="login">
+  <div class="container-fluid">
+    <h2 style="text-align: center; color: #FF6F61;">LOGIN</h2>
+    <h6 class="success" style="text-align: center; font-weight: bold; font-size: 16px">{{message}}</h6>
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6">
+        <div class="login-form">
+
+          <form action="/users/login" method="POST">
+            <div class="row">
+              <div class="col-md-12">
+                <label>E-mail / Username</label>
+                <input required id="email" class="form-control" name="email" type="email"
+                  placeholder="E-mail / Username">
+              </div>
+              <div class="col-md-12">
+                <label>Password</label>
+                <input required id="password" class="form-control" name="password" type="password"
+                  placeholder="Password">
+              </div>
+              <div class="col-md-12 d-flex justify-content-center">
+                <a href="/users/forgot-password">Forgot password?</a>
+              </div>
+              <div class="col-md-12">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="newaccount">
+                  <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                </div>
+              </div>
+              <div class="col-md-12 d-flex justify-content-center">
+                <button class="btn" onclick="login()">Submit</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Login End -->

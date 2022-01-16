@@ -1,0 +1,126 @@
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Products</a></li>
+      <li class="breadcrumb-item active">Cart</li>
+    </ul>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Cart Start -->
+<div class="cart-page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="cart-page-inner">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  {{!-- <th>Total</th> --}}
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody class="align-middle">
+                {{#if status}}
+                {{#each data.cart}}
+                <tr>
+                  <td>
+                    <div class="img">
+                      <a href="#"><img src="{{this.bookId.image}}" alt="Image"></a>
+                      <p><a href="/book/{{this.bookId._id}}/detail">{{this.bookId.name}}</a></p>
+                    </div>
+                  </td>
+                  <td>{{this.bookId.price}}</td>
+                  <td>
+                    <div class="cart-qty">
+                      <button class="cart-btn-minus" onclick="decreaseCount('{{this.bookId._id}}')"><i
+                          class="fa fa-minus"></i></button>
+                      <input id="{{this.bookId._id}}" type="text" value="{{this.amount}}" readonly>
+                      <button class="cart-btn-plus"
+                        onclick="increaseCount('{{this.bookId._id}}', {{this.bookId.quantity}})"><i
+                          class="fa fa-plus"></i></button>
+                    </div>
+                  </td>
+                  {{!-- <td>$99</td> --}}
+                  <td>
+                    <form action="/cart/delete-product/{{this.bookId._id}}" method="POST">
+                      <button type="submit">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {{/each}}
+                {{/if}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="cart-page-inner">
+          <div class="row">
+            {{!-- <div class="col-md-12">
+              <div class="coupon">
+                <input type="text" placeholder="Coupon Code">
+                <button>Apply Code</button>
+              </div>
+            </div> --}}
+            <div class="col-md-12">
+              <div class="cart-summary">
+                <div class="cart-content">
+                  <h1>Cart Summary</h1>
+                  <p>Sub Total<span class="sum-totalPrice">{{data.totalPrice}} VND</span></p>
+                  <p>Shipping Cost<span>0 VND</span></p>
+                  <h2>Grand Total<span class="sum-totalPrice">{{data.totalPrice}} VND</span></h2>
+                </div>
+                <div class="cart-btn d-flex justify-content-center">
+                  <button><a href="/cart/checkout">Checkout</a></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Cart End -->
+<script>
+  function updateTotalPrice(newValue) {
+    $('.sum-totalPrice').html(`${newValue} VND`);
+  }
+
+  function decreaseCount(bookId) {
+    const selector = `#${bookId}`;
+    let oldValue = parseInt($(selector).val());
+    if (oldValue > 1) {
+      $(selector).val(oldValue - 1);
+      $.post('/api/cart/change-amount', { bookId: bookId, amount: oldValue - 1 }, function (data) {
+        console.log(data);
+        updateTotalPrice(data.data.totalPrice);
+      })
+    }
+  }
+
+  function increaseCount(bookId, bookQuantity) {
+    const selector = `#${bookId}`;
+    let oldValue = parseInt($(selector).val());
+    if (oldValue < bookQuantity) {
+      $(selector).val(oldValue + 1);
+      $.post('/api/cart/change-amount', { bookId: bookId, amount: oldValue + 1 }, function (data) {
+        console.log(data);
+        updateTotalPrice(data.data.totalPrice);
+      })
+    }
+  }
+
+
+</script>

@@ -1,0 +1,131 @@
+<!-- Breadcrumb Start -->
+{{!-- <div class="breadcrumb-wrap">
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Products</a></li>
+      <li class="breadcrumb-item active">Register</li>
+    </ul>
+  </div>
+</div> --}}
+<!-- Breadcrumb End -->
+
+<!-- Login Start -->
+<div class="login">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6">
+        <h6 id="message" style="text-align: center; color: red;font-weight: bold">{{message}}</h6>
+        <form action="/users/register" method="POST" id="fm-register" onsubmit="return checkValidInputs()">
+          <div class="register-form">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="full-name">Full Name</label>
+                <input required id="full-name" class="form-control" name="full_name" type="text" placeholder="Full Name"
+                  oninput="validateFullName(this.value)">
+                <span id="full-name-message"></span>
+              </div>
+              <div class="col-md-6">
+                <label for="email">E-mail</label>
+                <input required id="email" class="form-control" name="email" type="email" placeholder="E-mail"
+                  onchange="checkEmailExist(this.value)">
+                <span id="email-message"></span>
+              </div>
+              <div class="col-md-6">
+                <label for="password">Password</label>
+                <input required id="password" class="form-control" name="password" type="password"
+                  placeholder="Password" oninput="validatePassword(this.value)">
+                <span id="password-message"></span>
+              </div>
+              <div class="col-md-6">
+                <label for="retype">Confirm Password</label>
+                <input required id="retype" class="form-control" type="password" placeholder="Confirm password"
+                  oninput="confirmPassword(this.value)">
+                <span id="retype-message"></span>
+              </div>
+             
+              <div class="col-md-12 d-flex justify-content-center" style="margin-top: 20px;">
+                <button id="submit" type="submit" class="btn" style="padding: 5px 30px;">Submit</button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Login End -->
+<script>
+  const fullNameRegex = /[0-9]/;
+  let isEmailExist = false;
+
+  function validateFullName(fullName) {
+    let result = false;
+    if (fullName.indexOf(" ") === 0) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name does not contain space at beginning");
+    }
+    else if (fullName.lastIndexOf(" ") === (fullName.length - 1)) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name does not contain space at the end");
+    }
+    else if (fullName.match(fullNameRegex)) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name contain only a-z, A-z");
+    } else {
+      $('#full-name-message').addClass('success').removeClass('error').html("");
+      result = true;
+    }
+    return result;
+  }
+
+  function checkEmailExist(email) {
+    //call user api to check if email is exist
+    console.log(email);
+    $.post('/api/users/check-email-exist', { email }, function (data) {
+      console.log(data);
+      if (!data) {
+        $('#email-message').addClass('success').removeClass('error').html("");
+        isEmailExist = false;
+      } else {
+        $('#email-message').addClass('error').removeClass('success').html("Email is already taken");
+        isEmailExist = true;
+      }
+    });
+  }
+
+  function validatePassword(password) {
+    let result = false;
+    if (password.indexOf(' ') >= 0) {
+      $('#password-message').addClass('error').removeClass('success').html("Password does not contain any space");
+    } else if (password.length < 6) {
+      $('#password-message').addClass('error').removeClass('success').html("Password must contains at least 6 characters");
+    } else {
+      $('#password-message').addClass('success').removeClass('error').html("");
+      result = true;
+    }
+    return result;
+  }
+
+  function confirmPassword(confirmPassword) {
+    let result = false;
+    const password = document.getElementById("password").value;
+    if (password !== confirmPassword) {
+      $('#retype-message').addClass('error').removeClass('success').html("Password does not match");
+    } else {
+      $('#retype-message').html("");
+      result = true;
+    }
+    return result;
+  }
+
+  function checkValidInputs() {
+    const isFullNameValid = validateFullName($('#full-name').val());
+    const isPassWordValid = validatePassword($('#password').val());
+    const isRetypeValid = confirmPassword($('#retype').val());
+    if (isFullNameValid && isPassWordValid && isRetypeValid && !isEmailExist) {
+      return true;
+    }
+    return false;
+  }
+
+</script>

@@ -1,0 +1,329 @@
+<!-- Breadcrumb Start -->
+{{!-- <div class="breadcrumb-wrap">
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Products</a></li>
+      <li class="breadcrumb-item active">My Account</li>
+    </ul>
+  </div>
+</div> --}}
+<!-- Breadcrumb End -->
+
+<!-- My Account Start -->
+<div class="my-account">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+          {{!-- <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i
+              class="fa fa-tachometer-alt"></i>Dashboard</a> --}}
+          <a class="nav-link active" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
+              class="fa fa-user"></i>Account
+            Details</a>
+          {{!-- <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
+              class="fa fa-shopping-bag"></i>Orders</a> --}}
+          {{!-- <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i
+              class="fa fa-credit-card"></i>Payment Method</a> --}}
+          {{!-- <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
+              class="fa fa-map-marker-alt"></i>address</a> --}}
+
+          <a class="nav-link" href="/users/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="tab-content">
+          {{!-- <div class="tab-pane fade " id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+            <h4>Dashboard</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra
+              dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit
+              finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in
+              faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu
+              rhoncus scelerisque.
+            </p>
+          </div> --}}
+          {{!-- <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>No</th>
+                    <th>Product</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Product Name</td>
+                    <td>01 Jan 2020</td>
+                    <td>$99</td>
+                    <td>Approved</td>
+                    <td><button class="btn">View</button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Product Name</td>
+                    <td>01 Jan 2020</td>
+                    <td>$99</td>
+                    <td>Approved</td>
+                    <td><button class="btn">View</button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Product Name</td>
+                    <td>01 Jan 2020</td>
+                    <td>$99</td>
+                    <td>Approved</td>
+                    <td><button class="btn">View</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div> --}}
+          {{!-- <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+            <h4>Payment Method</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra
+              dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit
+              finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in
+              faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu
+              rhoncus scelerisque.
+            </p>
+          </div>
+          <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+            <h4>Address</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Payment Address</h5>
+                <p>123 Payment Street, Los Angeles, CA</p>
+                <p>Mobile: 012-345-6789</p>
+                <button class="btn">Edit Address</button>
+              </div>
+              <div class="col-md-6">
+                <h5>Shipping Address</h5>
+                <p>123 Shipping Street, Los Angeles, CA</p>
+                <p>Mobile: 012-345-6789</p>
+                <button class="btn">Edit Address</button>
+              </div>
+            </div>
+          </div> --}}
+          <div class="tab-pane fade show active" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+            {{!-- <h2>{{message}}</h2> --}}
+            <h6 id="request-message" style="text-align: center; font-weight: bold; font-size: 16px"></h6>
+            <h4>Account Details</h4>
+
+            {{!-- action="/users/update-account" method="POST" onsubmit="return onUpdateUserInfo()" --}}
+            <div class="row">
+              <div class="col-md-6">
+                <label for="full-name">Full name</label>
+                <input id="full-name" name="full_name" class="form-control" type="text" value="{{user.full_name}}"
+                  onchange="validateFullName(this.value)">
+                <span id="full-name-message"></span>
+              </div>
+              <div class="col-md-6">
+                <label for="phone-number">Phone number</label>
+                <input id="phone-number" name="phone_number" class="form-control" type="tel"
+                  value="{{user.phone_number}}" onchange="validatePhoneNumber(this.value)">
+                <span id="phone-number-message"></span>
+              </div>
+              <div class="col-md-6">
+                <label for="email">Email</label>
+                <input id="email" readonly name="email" class="form-control" type="email" value="{{user.email}}">
+              </div>
+              <div class="col-md-12">
+                <label for="address">Address</label>
+                <input id="address" name="address" class="form-control" type="text" value="{{user.address}}"
+                  onchange="validateAddress(this.value)">
+                <span id="address-message"></span>
+              </div>
+              <div class="col-md-12">
+                <button class="btn" onclick="updateUserInfo()">Update Account</button>
+              </div>
+            </div>
+
+
+            <br><br>
+
+            <h6 id="change-password-request-message" style="text-align: center; font-weight: bold; font-size: 16px">
+            </h6>
+            <h4>Password change</h4>
+            {{!-- <form action="/users/change-password" method="POST" onsubmit="return onChangePassword()"> --}}
+              <div class="row">
+                <div class="col-md-12">
+                  <input id="current-password" name="current_password" class="form-control" type="password"
+                    placeholder="Current Password" oninput="validatePassword(this.id, this.value)">
+                  <span id="current-password-message"></span>
+                </div>
+                <div class="col-md-6">
+                  <input id="new-password" name="new_password" class="form-control" type="text"
+                    placeholder="New Password" oninput="validatePassword(this.id, this.value)">
+                  <span id="new-password-message"></span>
+                </div>
+                <div class="col-md-6">
+                  <input id="confirm-new-password" class="form-control" type="text" placeholder="Confirm Password"
+                    oninput="confirmPassword(this.value)">
+                  <span id="confirm-password-message"></span>
+                </div>
+                <div class="col-md-12">
+                  <button class="btn" onclick="changePassword()">Save Changes</button>
+                </div>
+              </div>
+              {{!--
+            </form> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- My Account End -->
+
+<script>
+  const fullNameRegex = /[0-9]/;
+  const phoneNumberRegex = /^[0-9]+$/;
+
+  function validateFullName(fullName) {
+    let result = false;
+    if (fullName.indexOf(" ") === 0) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name does not contain space at beginning");
+    }
+    else if (fullName.lastIndexOf(" ") === (fullName.length - 1)) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name does not contain space at the end");
+    }
+    else if (fullName.match(fullNameRegex)) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name contain only a-z, A-z");
+    } else {
+      $('#full-name-message').addClass('success').removeClass('error').html("");
+      result = true;
+    }
+    return result;
+  }
+
+  function validatePhoneNumber(phoneNumber) {
+    let result = false;
+    if (phoneNumber.match(phoneNumberRegex)) {
+      $('#phone-number-message').addClass('success').removeClass('error').html("");
+      result = true;
+    } else {
+      $('#phone-number-message').addClass('error').removeClass('success').html("Phone numbers contain only numeric characters");
+    }
+    return result;
+  }
+
+  function validateAddress(address) {
+    let result = false;
+    if (address.indexOf(' ') === 0 || address.lastIndexOf(' ') === (address.length - 1)) {
+      $('#address-message').addClass('error').removeClass('success').html("Address do not contain leading and trailing spaces");
+    } else {
+      $('#address-message').addClass('success').removeClass('error').html("");
+      result = true;
+    }
+
+    return result;
+  }
+
+  function validatePassword(id, password) {
+    let result = false;
+    let messageId = "";
+    if (id === "current-password") {
+      messageId = "current-password-message";
+    } else if (id === "new-password") {
+      messageId = "new-password-message";
+    }
+
+    if (password.indexOf(' ') >= 0) {
+      $('#' + messageId).addClass('error').removeClass('success').html("Password does not contain any space");
+    } else if (password.length < 6) {
+      $('#' + messageId).addClass('error').removeClass('success').html("Password must contains at least 6 characters");
+    } else {
+      $('#' + messageId).addClass('success').removeClass('error').html("");
+      result = true;
+    }
+    return result;
+  }
+
+  function confirmPassword(confirmPassword) {
+    let result = false;
+    const password = document.getElementById("new-password").value;
+    if (password !== confirmPassword) {
+      $('#confirm-password-message').addClass('error').removeClass('success').html("Password does not match");
+    } else {
+      $('#confirm-password-message').html("");
+      result = true;
+    }
+    return result;
+  }
+
+  function checkInputValue() {
+    const isFullNameValid = validateFullName($('#full-name').val());
+    const isPhoneNumberValid = validatePhoneNumber($('#phone-number').val());
+    const isAddressValid = validateAddress($('#address').val());
+    if (isFullNameValid && isPhoneNumberValid && isAddressValid) {
+      return true;
+    }
+    return false;
+  }
+
+  function checkPasswordInputs() {
+    const isCurrentPasswordValid = validatePassword($('#current-password').attr("id"), $('#current-password').val());
+    const isNewPasswordValid = validatePassword($('#new-password').attr("id"), $('#new-password').val());
+    const isConfirmPasswordValid = confirmPassword($('#confirm-new-password').val());
+
+    if (isCurrentPasswordValid && isNewPasswordValid && isConfirmPasswordValid) {
+      return true;
+    }
+    return false;
+  }
+
+  function updateUserInfo() {
+    $('#request-message').html("");
+    if (checkInputValue()) {
+      //Call api to update user info
+      const full_name = $('#full-name').val();
+      const phone_number = $('#phone-number').val();
+      const address = $('#address').val();
+
+      $.post('/api/users/update-user-info', { full_name, phone_number, address }, function (data) {
+        console.log(data)
+        if (data.status) {
+          $('#request-message').addClass('success').removeClass('error').html(data.message);
+        } else {
+          $('#request-message').addClass('error').removeClass('success').html(data.message);
+        }
+      });
+
+    }
+  }
+
+  function changePassword() {
+    $('#change-password-request-message').html("");
+    if (checkPasswordInputs()) {
+      const current_password = $('#current-password').val();
+      const new_password = $('#new-password').val();
+
+      $.post('/api/users/change-password', { current_password, new_password }, function (data) {
+        console.log(data);
+        if (data.status) {
+          $('#change-password-request-message').addClass('success').removeClass('error').html(data.message);
+          $('#current-password').val("")
+          $('#new-password').val("")
+          $('#confirm-new-password').val("")
+        } else {
+          $('#change-password-request-message').addClass('error').removeClass('success').html(data.message);
+        }
+
+      })
+    }
+  }
+
+  function getOrderHistory(userId) {
+    //call api to get 
+  }
+
+
+</script>

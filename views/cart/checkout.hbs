@@ -1,0 +1,153 @@
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Products</a></li>
+      <li class="breadcrumb-item active">Checkout</li>
+    </ul>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Checkout Start -->
+<div class="checkout">
+  <div class="container-fluid">
+
+    <form action="/cart/checkout" method="POST" class="col-lg-12 form" onsubmit="return checkInputValue()">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="checkout-inner">
+            <div class="billing-address">
+              <h2>Billing Address</h2>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="full-name">Full Name</label>
+                  <input id="full-name" class="form-control" type="text" placeholder="Full Name" name="full_name"
+                    value="{{user.full_name}}" onchange="validateFullName(this.value)">
+                  <span id="full-name-message"></span>
+                </div>
+                {{!-- <div class="col-md-6">
+                  <label>Last Name"</label>
+                  <input class="form-control" type="text" placeholder="Last Name">
+                </div> --}}
+                <div class="col-md-6">
+                  <label for="email">E-mail</label>
+                  <input id="email" class="form-control" type="text" placeholder="E-mail" name="email"
+                    value="{{user.email}}" readonly>
+                </div>
+                <div class="col-md-6">
+                  <label for="phone-number">Phone number</label>
+                  <input id="phone-number" class="form-control" type="text" placeholder="Mobile No" name="phone_number"
+                    value="{{user.phone_number}}" onchange="validatePhoneNumber(this.value)" maxlength="11">
+                  <span id="phone-number-message"></span>
+                </div>
+                <div class="col-md-12">
+                  <label for="address">Address</label>
+                  <input id="address" class="form-control" type="text" placeholder="Address" name="address"
+                    value="{{user.address}}" onchange="validateAddress(this.value)">
+                  <span id="address-message"></span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="checkout-inner">
+            <div class="checkout-summary">
+              <h1>Cart Total</h1>
+              <p class="sub-total">Sub Total<span>{{data.totalPrice}} VND</span></p>
+              <p class="ship-cost">Shipping Cost<span>0 VND</span></p>
+              <h2>Grand Total<span>{{data.totalPrice}} VND</span></h2>
+            </div>
+
+            <div class="checkout-payment">
+              <div class="payment-methods">
+                <h1>Payment Methods</h1>
+                <div class="payment-method">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="payment-1" name="payment" value="Paypal"
+                      required>
+                    <label class="custom-control-label" for="payment-1">Paypal</label>
+                  </div>
+                </div>
+                <div class="payment-method">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="payment-5" name="payment"
+                      value="Cash on Delivery" required>
+                    <label class="custom-control-label" for="payment-5">Cash on Delivery</label>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center">
+                {{#if data.cart}}
+                <button class="order-button" type="submit">Place Order</button>
+                {{else}}
+                <button class="order-disable-button" type="submit" disabled>Place Order</button>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Checkout End -->
+<script>
+  const fullNameRegex = /[0-9]/;
+  const phoneNumberRegex = /^[0-9]+$/;
+
+  function validateFullName(fullName) {
+    let result = false;
+    if (fullName.indexOf(" ") === 0) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name does not contain space at beginning");
+    }
+    else if (fullName.lastIndexOf(" ") === (fullName.length - 1)) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name does not contain space at the end");
+    }
+    else if (fullName.match(fullNameRegex)) {
+      $('#full-name-message').addClass('error').removeClass('success').html("Full name contain only a-z, A-z");
+    } else {
+      $('#full-name-message').addClass('success').removeClass('error').html("");
+      result = true;
+    }
+    return result;
+  }
+
+  function validatePhoneNumber(phoneNumber) {
+    let result = false;
+    if (phoneNumber.match(phoneNumberRegex)) {
+      $('#phone-number-message').addClass('success').removeClass('error').html("");
+      result = true;
+    } else {
+      $('#phone-number-message').addClass('error').removeClass('success').html("Phone numbers contain only numeric characters");
+    }
+    return result;
+  }
+
+  function validateAddress(address) {
+    let result = false;
+    if (address.indexOf(' ') === 0 || address.lastIndexOf(' ') === (address.length - 1)) {
+      $('#address-message').addClass('error').removeClass('success').html("Address do not contain leading and trailing spaces");
+    } else {
+      $('#address-message').addClass('success').removeClass('error').html("");
+      result = true;
+    }
+
+    return result;
+  }
+
+  function checkInputValue() {
+    const isFullNameValid = validateFullName($('#full-name').val());
+    const isPhoneNumberValid = validatePhoneNumber($('#phone-number').val());
+    const isAddressValid = validateAddress($('#address').val());
+    if (isFullNameValid && isPhoneNumberValid && isAddressValid) {
+      return true;
+    }
+    return false;
+  }
+
+</script>
